@@ -33,11 +33,11 @@ export class TaskResponseDto implements Task {
 
 @ApiSchemaName({ name: 'TaskCreateRequest' })
 export class TaskCreateRequestDto {
-  @ApiProperty({ description: 'title of task' })
+  @ApiProperty({ description: 'title of task', type: String })
   @IsString()
   title: string;
 
-  @ApiProperty({ description: 'due date' })
+  @ApiProperty({ description: 'due date', type: Date })
   @IsDate()
   dueDate: Date;
 }

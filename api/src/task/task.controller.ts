@@ -33,7 +33,7 @@ export class TaskController {
   }
 
   @Get('/:id')
-  @ApiResponse({ type: TaskResponseDto, isArray: true })
+  @ApiResponse({ type: TaskResponseDto })
   async getTaskById(@Param('id') id: number) {
     return this.taskService.getTaskById(id);
   }

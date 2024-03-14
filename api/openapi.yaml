@@ -1,0 +1,166 @@
+openapi: 3.0.0
+paths:
+  /api/health:
+    get:
+      operationId: AppController_simpleHealthCheck
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /api/tasks:
+    get:
+      operationId: TaskController_getTasks
+      parameters: []
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskResponse'
+      tags: &ref_0
+        - tasks
+    post:
+      operationId: TaskController_createTask
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateRequest'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+      tags: *ref_0
+  /api/tasks/{id}:
+    get:
+      operationId: TaskController_getTaskById
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+      tags: *ref_0
+    put:
+      operationId: TaskController_updateTask
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdateRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+      tags: *ref_0
+    delete:
+      operationId: TaskController_deleteTask
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '204':
+          description: ''
+      tags: *ref_0
+info:
+  title: TASK API
+  description: API documentation for task api
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    TaskResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier of the task
+        title:
+          type: string
+          description: The title of the task
+        dueDate:
+          format: date-time
+          type: string
+          description: The due date of the task
+        status:
+          type: number
+          description: 'The status of the task. 10: TO_DO, 20: IN_PROGRESS, 30: DONE'
+          enum:
+            - 10
+            - 20
+            - 30
+        createdAt:
+          format: date-time
+          type: string
+          description: The creation date of the task
+        updatedAt:
+          format: date-time
+          type: string
+          description: The update date of the task
+      required:
+        - id
+        - title
+        - dueDate
+        - status
+        - createdAt
+        - updatedAt
+    TaskCreateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: title of task
+        dueDate:
+          format: date-time
+          type: string
+          description: due date
+      required:
+        - title
+        - dueDate
+    TaskUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: title of task
+        dueDate:
+          format: date-time
+          type: string
+          description: due date
+        status:
+          type: number
+          description: 'status, 10: TO_DO, 20: IN_PROGRESS, 30: DONE'''
+      required:
+        - title
+        - dueDate
+        - status
