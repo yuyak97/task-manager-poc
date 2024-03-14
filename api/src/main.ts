@@ -10,6 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.disable('x-powered-by');
   app.setGlobalPrefix('api');
+  app.enableCors();
 
   // pipe line for validation
   app.useGlobalPipes(
