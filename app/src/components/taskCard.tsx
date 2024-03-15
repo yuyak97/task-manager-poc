@@ -5,6 +5,7 @@ import { Card, CardContent, Grid } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import TaskStatusLabel from "./taskStatusLabel";
+import DueDate from "./dueDate";
 
 type Props = {
   task: Task;
@@ -20,10 +21,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
           <CardContent>
             <h2>{title}</h2>
             <p>
-              Due date:{" "}
-              <time dateTime={dueDate}>
-                {formatDateString(new Date(dueDate), "yyyy/MM/dd")}
-              </time>
+              Due date: <DueDate dueDate={dueDate} />
             </p>
             <p>
               Created at:{" "}
