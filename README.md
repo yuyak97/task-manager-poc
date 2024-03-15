@@ -37,7 +37,11 @@ Here's a quick look at the use flow in action:
 
 ## How to start
 
-Please set env variable for both directory.
+Please set env variable for both directory. Simply you can run this command
+
+```bash
+$ cp ./api/.env.local.example ./api/.env && cp ./app/.env.local.example ./app/.env.local
+```
 
 - For the **api** directory: Duplicate the `.env.local.example` file and rename the copy to `.env`, ensuring it remains in the same directory.
 - For the **app** directory: Duplicate the `.env.local.example` file and rename the copy to `.env.local`, making sure it's also in the same directory.
@@ -45,10 +49,10 @@ Please set env variable for both directory.
 Run commands below
 
 ```bash
-# start app
-$ make start-app
 # start api
 $ make start-api
+# start app
+$ make start-app
 # insert data
 $ make init-data
 ```
