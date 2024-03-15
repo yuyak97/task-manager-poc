@@ -7,18 +7,23 @@ import {
   taskControllerGetTasks,
   taskControllerUpdateTask,
 } from "@/api/generated";
+import { ApiError } from "@/enums/api-error.enum";
 import { ReduxToolkitSlice } from "@/enums/slice.enum";
-import { Task } from "@/type/task.type";
+import { Task } from "@/types/task.type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 type InitialState = {
   tasks: Task[];
-  selectedTask: Task | null;
+  selectedTask?: Task | null;
+  createdTask?: Task | null;
+  error: string | null;
 };
 
 const initialState: InitialState = {
   selectedTask: null,
+  createdTask: null,
   tasks: [],
+  error: null,
 };
 
 export const getTasksThunk = createAsyncThunk(
@@ -59,7 +64,11 @@ export const deleteTaskThunk = createAsyncThunk(
 const taskSlice = createSlice({
   name: ReduxToolkitSlice.TASK,
   initialState,
-  reducers: {},
+  reducers: {
+    setCreatedTask: (state, action) => {
+      state.createdTask = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getTasksThunk.fulfilled, (state, action) => {
       state.tasks = action.payload;
@@ -67,8 +76,12 @@ const taskSlice = createSlice({
     builder.addCase(getTaskByIdThunk.fulfilled, (state, action) => {
       state.selectedTask = action.payload;
     });
+    builder.addCase(getTaskByIdThunk.rejected, (state, action) => {
+      // TODO: error handling depending on error message is required
+      state.error = ApiError.ERR_BAD_REQUEST;
+    });
     builder.addCase(createTaskThunk.fulfilled, (state, action) => {
-      state.selectedTask = action.payload;
+      state.createdTask = action.payload;
     });
   },
 });

@@ -1,8 +1,10 @@
 import { taskStatus } from "@/consts/task-status.const";
-import { Task } from "@/type/task.type";
+import { Task } from "@/types/task.type";
 import { formatDateString } from "@/utils/date.util";
 import { Card, CardContent, Grid } from "@mui/material";
+import Link from "next/link";
 import React from "react";
+import TaskStatusLabel from "./taskStatusLabel";
 
 type Props = {
   task: Task;
@@ -14,22 +16,26 @@ const TaskCard: React.FC<Props> = ({ task }) => {
   return (
     <Grid item xs={12} sm={6} md={4} key={id}>
       <Card variant="outlined">
-        <CardContent>
-          <h2>{title}</h2>
-          <p>
-            Due date:{" "}
-            <time dateTime={dueDate}>
-              {formatDateString(new Date(dueDate), "yyyy/MM/dd")}
-            </time>
-          </p>
-          <p>
-            Created at:{" "}
-            <time dateTime={createdAt}>
-              {formatDateString(new Date(createdAt), "yyyy/MM/dd")}
-            </time>
-          </p>
-          <p>Status: {taskStatus[status]}</p>
-        </CardContent>
+        <Link href={`/tasks/${id}`}>
+          <CardContent>
+            <h2>{title}</h2>
+            <p>
+              Due date:{" "}
+              <time dateTime={dueDate}>
+                {formatDateString(new Date(dueDate), "yyyy/MM/dd")}
+              </time>
+            </p>
+            <p>
+              Created at:{" "}
+              <time dateTime={createdAt}>
+                {formatDateString(new Date(createdAt), "yyyy/MM/dd")}
+              </time>
+            </p>
+            <div>
+              Status: <TaskStatusLabel status={status} />
+            </div>
+          </CardContent>
+        </Link>
       </Card>
     </Grid>
   );

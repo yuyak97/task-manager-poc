@@ -32,19 +32,15 @@ export class TaskService {
   }
 
   async getTaskById(id: number) {
-    try {
-      const task = await this.taskRep.findOne({ where: { id } });
-      // If the record filtered by id does not exist,
-      // return 404
-      if (!task) {
-        throw new NotFoundException();
-      }
+    const task = await this.taskRep.findOne({ where: { id } });
 
-      return this.mapTaskResponse(task);
-    } catch (err) {
-      this.logger.error(err);
-      throw new InternalServerErrorException();
+    // If the record filtered by id does not exist,
+    // return 404
+    if (!task) {
+      throw new NotFoundException();
     }
+
+    return this.mapTaskResponse(task);
   }
 
   async createTask(data: TaskCreateRequestDto) {
