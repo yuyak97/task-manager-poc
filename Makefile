@@ -8,7 +8,7 @@ start-app:
 
 .PHONY: start-api
 start-api:
-	cd api && npm i && docker-compose up
+	cd api && npm install && docker-compose up
 
 .PHONY: init-data
 init-data: 

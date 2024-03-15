@@ -37,6 +37,11 @@ Here's a quick look at the use flow in action:
 
 ## How to start
 
+Please set env variable for both directory.
+
+- For the **api** directory: Duplicate the `.env.local.example` file and rename the copy to `.env`, ensuring it remains in the same directory.
+- For the **app** directory: Duplicate the `.env.local.example` file and rename the copy to `.env.local`, making sure it's also in the same directory.
+
 Run commands below
 
 ```bash
