@@ -17,7 +17,7 @@ services:
     depends_on:
       - db
   db:
-    build: task-db
+    build: db
     container_name: task-db
     environment:
       TZ: Europe/Paris
