@@ -29,11 +29,33 @@ Updated at
 
 ## What I implemented
 
-Following the requirement, I implemented a simple CRUD system with a single table.
+Following the requirement, I implemented a simple CRUD system with a single table and 2 screens.
 
 Here's a quick look at the use flow in action:
 
-![use flow](./asset/use-flow.gif)
+![use flow](./assets/use-flow.gif)
+
+<details>
+<summary>Task list screen</summary>
+
+- On this screen, the list of task cards is shown.
+- If the due date is before today, the color of the due date is <span style='color: red;'>red</span>.
+- Each card is a link to the task detail screen.
+- From the button above the list, users can create a new task. When creating a task, the default status is 'todo'
+
+![task list](./assets/task-list-screen.png)
+
+</details>
+
+<details>
+<summary>Task detail screen</summary>
+
+- On this screen, users can update the title, the due date, and the status.
+- Users can delete the task using the delete button at the bottom.
+
+![task list](./assets/task-detail-screen.png)
+
+</details>
 
 ## How to start
 
@@ -53,9 +75,12 @@ Run commands below
 $ make start-api
 # start app
 $ make start-app
-# insert data
+# insert test data
 $ make init-data
 ```
+
+- API runs on localhost:8000
+- APP runs on localhost:3000
 
 ## ERD
 
