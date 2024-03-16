@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -34,7 +35,7 @@ export class TaskController {
 
   @Get('/:id')
   @ApiResponse({ type: TaskResponseDto })
-  async getTaskById(@Param('id') id: number) {
+  async getTaskById(@Param('id', ParseIntPipe) id: number) {
     return this.taskService.getTaskById(id);
   }
 
